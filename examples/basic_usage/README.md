@@ -2,10 +2,11 @@
 
 Basic quickstart for creating a task definition with multiple container definitions.
 
+This example uses the `ecs-container-definition` module to create the container definitions.
+
 Example shows using Default Tags in the provider as well as passing additional tags into the resource.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
 
 ## Examples
 
@@ -101,6 +102,5 @@ No inputs.
 | Name | Description |
 |------|-------------|
 | <a name="output_task_definition"></a> [task\_definition](#output\_task\_definition) | n/a |
-
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

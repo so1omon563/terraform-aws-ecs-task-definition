@@ -6,74 +6,16 @@ Note that this module does not currently support FSx Windows file system volumes
 
 Note on the `container_definitions` variable. This variable accepts json to define the [container definitions](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html).
 
-The `container-definition` module can be used to generate this json, or it can be passed in on its own.
+The `ecs-container-definition` module can be used to generate this json, or it can be passed in on its own. Examples of both are provided in the `examples`.
 
   > Proper escaping is required for JSON field values containing quotes (`"`) such as `environment` values.
   > If directly setting the JSON, they should be escaped as `\"` in the JSON, e.g. `"value": "I \"love\" escaped quotes"`.
   > If using a Terraform variable value, they should be escaped as `\\\"` in the variable, e.g. `value = "I \\\"love\\\" escaped quotes"` in the variable and `"value": "${var.myvariable}"` in the JSON.
 
-
-## Quick Start
-
-Examples may not be up to date.
-
-### EC2 task
-```hcl-terraform
-module "task" {
-  source      = "path/to/modules/task"
-  name        = "web"
-  launch_type = "EC2"
-
-  memory = {
-    hard_limit = 64
-  }
-
-  tags = {
-    environment   = "ecs-ec2-task-example"
-    t_environment = "DEV"
-    t_AppID       = "SVC000000"
-  }
-
-  container_definitions = jsonencode([
-    map(
-      name, "nginx",
-      image, "nginx:1.18-alpine",
-      container, map(essential, true)
-    )
-  ])
-}
-```
-
-### Fargate task
-```hcl-terraform
-module "task" {
-  source      = "path/to/modules/task"
-  name        = "web"
-  launch_type = "FARGATE"
-
-  fargate_settings = {
-    cpu    = 512
-    memory = 1024
-  }
-
-  tags = {
-    environment   = "ecs-fargate-task-example"
-    t_environment = "DEV"
-    t_AppID       = "SVC000000"
-  }
-
-  container_definitions = jsonencode([
-    map(
-      name, "nginx",
-      image, "nginx:1.18-alpine",
-      container, map(essential, true)
-    )
-  ])
-}
-```
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 Auto-generated technical documentation is created using [`terraform-docs`](https://terraform-docs.io/)
+
 ## Examples
 
 ```hcl
@@ -134,6 +76,5 @@ No modules.
 |------|-------------|
 | <a name="output_ignore_changes"></a> [ignore\_changes](#output\_ignore\_changes) | Whether or not the task is set to ignore changes. |
 | <a name="output_task_definition"></a> [task\_definition](#output\_task\_definition) | A collection of outputs for the created ECS Task Definition. |
-
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

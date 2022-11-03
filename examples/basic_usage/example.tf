@@ -58,3 +58,32 @@ module "task" {
 output "task_definition" {
   value = module.task.task_definition
 }
+
+# Passing in values directly to the `container_definitions` variable to create a task
+module "task-direct-definition" {
+  source = "../../"
+  # Replace with appropriate version
+
+  name = "example-task-direct-definition"
+  # Pass in a definition directly
+  container_definitions = jsonencode([
+    {
+      name   = "nginx",
+      image  = "nginx:1.18-alpine",
+      memory = 64,
+      container = {
+        essential = true
+      }
+    }
+  ])
+  tags = {
+    example = "true"
+  }
+}
+
+output "task_definition_direct_definition" {
+  value = module.task-direct-definition.task_definition
+}
+
+
+
