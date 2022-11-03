@@ -2,7 +2,7 @@
 
 Basic quickstart for creating a task definition with multiple container definitions.
 
-This example uses the `ecs-container-definition` module to create the container definitions.
+This example uses the `ecs-container-definition` module to create the container definitions, as well as passing in a definition directly.
 
 Example shows using Default Tags in the provider as well as passing additional tags into the resource.
 
@@ -58,8 +58,8 @@ module "container2" {
 
 # Creating the task using the 2 container definitions
 module "task" {
-  source = "../../"
-  # Replace with appropriate version
+  source  = "so1omon563/ecs-task-definition/aws"
+  version = "1.0.0" # Replace with appropriate version
 
   name = "example-task"
   # Put multiple containers in a task
@@ -75,8 +75,8 @@ output "task_definition" {
 
 # Passing in values directly to the `container_definitions` variable to create a task
 module "task-direct-definition" {
-  source = "../../"
-  # Replace with appropriate version
+  source  = "so1omon563/ecs-task-definition/aws"
+  version = "1.0.0" # Replace with appropriate version
 
   name = "example-task-direct-definition"
   # Pass in a definition directly
@@ -114,8 +114,8 @@ No providers.
 |------|--------|---------|
 | <a name="module_container"></a> [container](#module\_container) | so1omon563/ecs-container-definition/aws | 2.0.0 |
 | <a name="module_container2"></a> [container2](#module\_container2) | so1omon563/ecs-container-definition/aws | 2.0.0 |
-| <a name="module_task"></a> [task](#module\_task) | ../../ | n/a |
-| <a name="module_task-direct-definition"></a> [task-direct-definition](#module\_task-direct-definition) | ../../ | n/a |
+| <a name="module_task"></a> [task](#module\_task) | so1omon563/ecs-task-definition/aws | 1.0.0 |
+| <a name="module_task-direct-definition"></a> [task-direct-definition](#module\_task-direct-definition) | so1omon563/ecs-task-definition/aws | 1.0.0 |
 
 ## Resources
 

@@ -44,8 +44,8 @@ module "container2" {
 
 # Creating the task using the 2 container definitions
 module "task" {
-  source = "../../"
-  # Replace with appropriate version
+  source  = "so1omon563/ecs-task-definition/aws"
+  version = "1.0.0" # Replace with appropriate version
 
   name = "example-task"
   # Put multiple containers in a task
@@ -61,8 +61,8 @@ output "task_definition" {
 
 # Passing in values directly to the `container_definitions` variable to create a task
 module "task-direct-definition" {
-  source = "../../"
-  # Replace with appropriate version
+  source  = "so1omon563/ecs-task-definition/aws"
+  version = "1.0.0" # Replace with appropriate version
 
   name = "example-task-direct-definition"
   # Pass in a definition directly
