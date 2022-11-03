@@ -8,6 +8,7 @@ Example shows using Default Tags in the provider as well as passing additional t
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
+
 ## Examples
 
 ```hcl
@@ -71,6 +72,32 @@ module "task" {
 output "task_definition" {
   value = module.task.task_definition
 }
+
+# Passing in values directly to the `container_definitions` variable to create a task
+module "task-direct-definition" {
+  source = "../../"
+  # Replace with appropriate version
+
+  name = "example-task-direct-definition"
+  # Pass in a definition directly
+  container_definitions = jsonencode([
+    {
+      name   = "nginx",
+      image  = "nginx:1.18-alpine",
+      memory = 64,
+      container = {
+        essential = true
+      }
+    }
+  ])
+  tags = {
+    example = "true"
+  }
+}
+
+output "task_definition_direct_definition" {
+  value = module.task-direct-definition.task_definition
+}
 ```
 
 ## Requirements
@@ -88,6 +115,7 @@ No providers.
 | <a name="module_container"></a> [container](#module\_container) | so1omon563/ecs-container-definition/aws | 2.0.0 |
 | <a name="module_container2"></a> [container2](#module\_container2) | so1omon563/ecs-container-definition/aws | 2.0.0 |
 | <a name="module_task"></a> [task](#module\_task) | ../../ | n/a |
+| <a name="module_task-direct-definition"></a> [task-direct-definition](#module\_task-direct-definition) | ../../ | n/a |
 
 ## Resources
 
@@ -102,5 +130,7 @@ No inputs.
 | Name | Description |
 |------|-------------|
 | <a name="output_task_definition"></a> [task\_definition](#output\_task\_definition) | n/a |
+| <a name="output_task_definition_direct_definition"></a> [task\_definition\_direct\_definition](#output\_task\_definition\_direct\_definition) | n/a |
+
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

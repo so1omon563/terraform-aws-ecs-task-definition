@@ -84,6 +84,3 @@ module "task-direct-definition" {
 output "task_definition_direct_definition" {
   value = module.task-direct-definition.task_definition
 }
-
-
-
