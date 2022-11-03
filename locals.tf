@@ -1,6 +1,10 @@
 locals {
-  tags = var.tags
+  tags        = var.tags
+  launch_type = upper(var.launch_type)
+  family_name = var.family_name != null ? format("%s-%s", var.name, var.family_name) : format("%s", var.name)
+  task_name   = var.task_name_override != null ? var.task_name_override : local.family_name
 
-  name       = var.topic_name_override != null ? var.topic_name_override : var.topic_prefix == null ? format("%s", var.name) : format("%s-%s", var.name, var.topic_prefix)
-  topic_name = var.fifo_topic ? format("%s.fifo", local.name) : local.name
+  task_ignore       = var.ignore_changes == true ? { task_ignore = "ignore" } : {}
+  task              = var.ignore_changes == false ? { task = "ignore" } : {}
+  ephemeral_storage = var.ephemeral_storage_size_in_gb != null ? { ephemeral_storage = "ignore" } : {}
 }

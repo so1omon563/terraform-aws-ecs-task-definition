@@ -1,17 +1,16 @@
-variable "name" {}
-
-variable "tags" {}
-
 provider "aws" {
   default_tags {
-    tags = var.tags
+    tags = {
+      environment = "dev"
+      terraform   = "true"
+    }
   }
 }
 
 # Using the `ecs-container-definition` module to create 2 container definitions
 module "container" {
   source  = "so1omon563/ecs-container-definition/aws"
-  version = "2.0.0"
+  version = "2.0.0" # Replace with appropriate version
 
   name  = "nginx"
   image = "nginx:1.18-alpine"
@@ -28,7 +27,7 @@ module "container" {
 
 module "container2" {
   source  = "so1omon563/ecs-container-definition/aws"
-  version = "2.0.0"
+  version = "2.0.0" # Replace with appropriate version
 
   name  = "nginx2"
   image = "nginx:1.18-alpine"
@@ -45,10 +44,10 @@ module "container2" {
 
 # Creating the task using the 2 container definitions
 module "task" {
-  source = "../../../"
+  source = "../../"
   # Replace with appropriate version
 
-  name = var.name
+  name = "example-task"
   # Put multiple containers in a task
   container_definitions = "[  ${module.container.json}, ${module.container2.json} ]"
   tags = {
